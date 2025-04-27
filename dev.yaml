@@ -20,3 +20,5 @@ Service:
 Repository:
     Name: "redis"
     Redis: {}
+ConfigRepository:
+    name: "memory"

@@ -46,6 +46,8 @@ func (a *HTTPServer) Run(ctx context.Context) error {
 	serviceSf := service.NewServiceFactory(ctx, &a.cfg.Service, repository)
 
 	mux := runtime.NewServeMux()
+	// setup configo for ui
+	a.cfg.SetupConfigoUI(ctx, mux)
 	utils.RegisterSwaggerHandler(ctx, mux, "/swagger", "./api/docs/proto", "/v1/gobaseservice.swagger.json")
 	err := gobaseservice_v1.RegisterBaseServiceHandlerServer(ctx, mux, serviceSf.PingService)
 	if err != nil {

@@ -36,6 +36,8 @@ func main() {
 	bytes, _ := yaml.Marshal(conf)
 	logger.Debug(ctx, "\n%s", bytes)
 
+	conf.SetUpConfigo(ctx)
+
 	// starting application
 	var apps []apputils.Application
 	for _, appName := range conf.AppNames {
