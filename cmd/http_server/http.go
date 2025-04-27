@@ -35,7 +35,7 @@ func NewHTTPServer(cfg *configs.Configuration) *HTTPServer {
 	}
 }
 
-func (a *HTTPServer) Run(ctx context.Context) {
+func (a *HTTPServer) Run(ctx context.Context) error {
 
 	if a.cfg.Server.HTTPPort == 0 {
 		logger.Panic(ctx, "http port is not provided")
@@ -63,4 +63,5 @@ func (a *HTTPServer) Run(ctx context.Context) {
 	if err != nil && err != http.ErrServerClosed {
 		logger.Panic(ctx, "failed to start http server : %v", err)
 	}
+	return nil
 }

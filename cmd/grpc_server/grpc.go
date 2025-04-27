@@ -35,7 +35,7 @@ func NewGRPCServer(cfg *configs.Configuration) *GRPCServer {
 	}
 }
 
-func (a *GRPCServer) Run(ctx context.Context) {
+func (a *GRPCServer) Run(ctx context.Context) error {
 
 	if a.cfg.Server.GRPCPort == 0 {
 		logger.Panic(ctx, "grpc port is not provided")
@@ -62,4 +62,5 @@ func (a *GRPCServer) Run(ctx context.Context) {
 	if err := grpcServer.Serve(lis); err != nil {
 		logger.Panic(ctx, "failed to start grpc server: %v", err)
 	}
+	return nil
 }

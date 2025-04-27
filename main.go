@@ -20,11 +20,6 @@ var (
 	path string
 )
 
-type Application interface {
-	Run(ctx context.Context)
-	apputils.Application
-}
-
 func main() {
 	flag.StringVar(&env, "env", "dev", "-env=dev")
 	flag.StringVar(&path, "path", ".", "-path=./")
@@ -49,7 +44,7 @@ func main() {
 	logger.Debug(ctx, "\n%s", bytes)
 
 	// starting application
-	var apps []Application
+	var apps []apputils.Application
 	for _, appName := range conf.AppNames {
 		switch appName {
 		case constants.HTTP_SERVER:
