@@ -13,8 +13,8 @@ const (
 )
 
 type Config struct {
-	Name  string
-	Redis redis.Config
+	Name  string       `yaml:"Name"`
+	Redis redis.Config `yaml:"Redis"`
 }
 
 func NewRepository(ctx context.Context, cfg *Config) service.Repository {

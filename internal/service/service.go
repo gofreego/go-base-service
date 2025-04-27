@@ -6,7 +6,7 @@ import (
 )
 
 type Config struct {
-	Ping ping.Config
+	Ping ping.Config `yaml:"Ping"`
 }
 
 type Repository interface {

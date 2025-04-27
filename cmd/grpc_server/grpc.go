@@ -8,7 +8,6 @@ import (
 	"gobaseservice/internal/repository"
 	"gobaseservice/internal/service"
 	"net"
-	"net/http"
 
 	"github.com/gofreego/goutils/logger"
 	"google.golang.org/grpc"
@@ -16,7 +15,7 @@ import (
 
 type GRPCServer struct {
 	cfg    *configs.Configuration
-	server *http.Server
+	server *grpc.Server
 }
 
 func (a *GRPCServer) Name() string {
@@ -24,9 +23,7 @@ func (a *GRPCServer) Name() string {
 }
 
 func (a *GRPCServer) Shutdown(ctx context.Context) {
-	if err := a.server.Shutdown(ctx); err != nil {
-		logger.Panic(ctx, "failed to shutdown %s : %v", a.Name(), err)
-	}
+	a.server.GracefulStop()
 }
 
 func NewGRPCServer(cfg *configs.Configuration) *GRPCServer {
@@ -46,9 +43,9 @@ func (a *GRPCServer) Run(ctx context.Context) error {
 	serviceSf := service.NewServiceFactory(ctx, &a.cfg.Service, repository)
 
 	// Create a new gRPC server
-	grpcServer := grpc.NewServer()
+	a.server = grpc.NewServer()
 
-	gobaseservice_v1.RegisterBaseServiceServer(grpcServer, serviceSf.PingService)
+	gobaseservice_v1.RegisterBaseServiceServer(a.server, serviceSf.PingService)
 
 	logger.Info(ctx, "Starting gRPC server on port %d", a.cfg.Server.GRPCPort)
 
@@ -59,7 +56,7 @@ func (a *GRPCServer) Run(ctx context.Context) error {
 	}
 
 	// Start the gRPC server
-	if err := grpcServer.Serve(lis); err != nil {
+	if err := a.server.Serve(lis); err != nil {
 		logger.Panic(ctx, "failed to start grpc server: %v", err)
 	}
 	return nil

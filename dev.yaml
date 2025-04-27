@@ -1,22 +1,22 @@
-name: "go-base-service"
-appnames: ["HTTP_SERVER", "GRPC_SERVER"]
+Name: "go-base-service"
+AppNames: ["HTTP_SERVER", "GRPC_SERVER"]
 Server:
     HTTPPort: 8080
     GRPCPort: 8081
-logger:
-    appname: "go-base-service"
-    build: "dev"
-    level: "debug" # info/error
-controller:
-    name: "http"
-    http:
-        port: 8080
-        ginmode: "release"
-        readtimeoutmillis: 500
-        writetimeoutmillis: 500
-        ping: {}
-service:
-    ping: {}
-repository:
-    name: "redis"
-    redis: {}
+Logger:
+    AppName: "go-base-service"
+    Build: "dev"
+    Level: "debug" # info/error
+Controller:
+    Name: "http"
+    HTTP:
+        Port: 8080
+        GinMode: "release"
+        ReadTimeoutMillis: 500
+        WriteTimeoutMillis: 500
+        Ping: {}
+Service:
+    Ping: {}
+Repository:
+    Name: "redis"
+    Redis: {}
