@@ -25,5 +25,5 @@ install:
 
 setup:
 	buf dep update
-	buf generate ./proto/v1/*.proto
+	buf generate ./api/v1/*.proto
 	go mod tidy

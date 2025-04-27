@@ -6,7 +6,7 @@ import (
 	"gobaseservice/internal/configs"
 	"gobaseservice/internal/repository"
 	"gobaseservice/internal/service"
-	"gobaseservice/pkg/api/gobaseservice"
+	"gobaseservice/pkg/api/gobaseservice_v1"
 	"net"
 	"net/http"
 
@@ -49,7 +49,7 @@ func (a *GRPCServer) Run(ctx context.Context) {
 	// Create a new gRPC server
 	grpcServer := grpc.NewServer()
 
-	gobaseservice.RegisterBaseServiceServer(grpcServer, serviceSf.PingService)
+	gobaseservice_v1.RegisterBaseServiceServer(grpcServer, serviceSf.PingService)
 
 	logger.Info(ctx, "Starting gRPC server on port %d", a.cfg.Server.GRPCPort)
 

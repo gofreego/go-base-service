@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: proto/v1/gobaseservice.proto
+// source: api/v1/gobaseservice.proto
 
-package gobaseservice
+package gobaseservice_v1
 
 import (
 	context "context"
@@ -163,5 +163,5 @@ var BaseService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/v1/gobaseservice.proto",
+	Metadata: "api/v1/gobaseservice.proto",
 }
