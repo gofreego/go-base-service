@@ -1,7 +1,7 @@
 syntax = "proto3";
 package v1;
 
-option go_package = "pkg/api/gobaseservice_v1";
+option go_package = "./gobaseservice_v1";
 
 import "google/api/annotations.proto";
 

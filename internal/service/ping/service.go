@@ -2,7 +2,7 @@ package ping
 
 import (
 	"context"
-	"gobaseservice/pkg/api/gobaseservice_v1"
+	"gobaseservice/api/gobaseservice_v1"
 
 	"github.com/gofreego/goutils/logger"
 )

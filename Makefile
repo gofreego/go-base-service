@@ -24,6 +24,5 @@ install:
     google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
 setup:
-	buf dep update
-	buf generate ./api/v1/*.proto
+	sh ./api/protoc.sh
 	go mod tidy

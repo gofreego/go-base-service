@@ -3,16 +3,15 @@ package grpc_server
 import (
 	"context"
 	"fmt"
+	"gobaseservice/api/gobaseservice_v1"
 	"gobaseservice/internal/configs"
 	"gobaseservice/internal/repository"
 	"gobaseservice/internal/service"
-	"gobaseservice/pkg/api/gobaseservice_v1"
 	"net"
 	"net/http"
 
 	"github.com/gofreego/goutils/logger"
 	"google.golang.org/grpc"
-	// Update
 )
 
 type GRPCServer struct {

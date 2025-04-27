@@ -3,10 +3,10 @@ package http_server
 import (
 	"context"
 	"fmt"
+	"gobaseservice/api/gobaseservice_v1"
 	"gobaseservice/internal/configs"
 	"gobaseservice/internal/repository"
 	"gobaseservice/internal/service"
-	"gobaseservice/pkg/api/gobaseservice_v1"
 	"gobaseservice/pkg/utils"
 	"net/http"
 
@@ -46,7 +46,7 @@ func (a *HTTPServer) Run(ctx context.Context) {
 	serviceSf := service.NewServiceFactory(ctx, &a.cfg.Service, repository)
 
 	mux := runtime.NewServeMux()
-	utils.RegisterSwaggerHandler(ctx, mux, "/swagger", "./docs/proto/", "/v1/gobaseservice_v1.swagger.json")
+	utils.RegisterSwaggerHandler(ctx, mux, "/swagger", "./api/docs/proto", "/v1/gobaseservice.swagger.json")
 	err := gobaseservice_v1.RegisterBaseServiceHandlerServer(ctx, mux, serviceSf.PingService)
 	if err != nil {
 		logger.Panic(ctx, "failed to register ping service : %v", err)

@@ -15,14 +15,6 @@ func RegisterSwaggerHandler(ctx context.Context, mux *runtime.ServeMux, swaggerP
 		http.StripPrefix(swaggerPath, swaggerFS).ServeHTTP(w, r)
 	})
 
-	// // Redirect to Swagger UI index.html on the official CDN with a query parameter pointing to your local Swagger file
-	// mux.HandlePath("GET", swaggerPath, func(w http.ResponseWriter, r *http.Request, pathParams map[string]string) {
-	// 	swaggerFileURL := swaggerPath + "gobaseservice.swagger.json" // Adjust for JSON if needed
-	// 	uiURL := fmt.Sprintf("https://petstore.swagger.io/?url=http://localhost:8080%s", swaggerFileURL)
-
-	// 	http.Redirect(w, r, uiURL, http.StatusTemporaryRedirect)
-	// })
-
 	// Serve a simple HTML page that references the Swagger UI from the official CDN
 	mux.HandlePath("GET", swaggerPath, func(w http.ResponseWriter, r *http.Request, pathParams map[string]string) {
 		w.Header().Set("Content-Type", "text/html")
