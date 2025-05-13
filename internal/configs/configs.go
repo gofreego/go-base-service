@@ -52,7 +52,7 @@ func (c *Configuration) SetUpConfigo(ctx context.Context) {
 		ServiceDescription:  "Basic service for starting a new service",
 		ConfigRefreshInSecs: 60,
 	}
-	configManager, err := configo.NewConfigManager(ctx, &cfg, repo)
+	configManager, err := configo.NewConfigManager(ctx, &cfg, repo, "/gobaseservice")
 	if err != nil {
 		logger.Panic(ctx, "failed to create config manager: %v", err)
 	}
@@ -66,13 +66,10 @@ func (c *Configuration) RefreshLogger() {
 }
 
 func (c *Configuration) SetupConfigoUI(ctx context.Context, mux *runtime.ServeMux) {
-	err := c.configManager.RegisterRoute(ctx, func(method, path string, handler http.HandlerFunc) error {
-		handleFunc := func(w http.ResponseWriter, r *http.Request, _ map[string]string) {
-			handler(w, r)
-		}
-		return mux.HandlePath(method, path, handleFunc)
+	mux.HandlePath(http.MethodGet, "/gobaseservice/configo/**", func(w http.ResponseWriter, r *http.Request, _ map[string]string) {
+		c.configManager.ServeHTTP(w, r)
 	})
-	if err != nil {
-		logger.Panic(ctx, "failed to register configo ui: %v", err)
-	}
+	mux.HandlePath(http.MethodPost, "/gobaseservice/configo/*", func(w http.ResponseWriter, r *http.Request, _ map[string]string) {
+		c.configManager.ServeHTTP(w, r)
+	})
 }

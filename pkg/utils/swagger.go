@@ -11,7 +11,7 @@ import (
 func RegisterSwaggerHandler(ctx context.Context, mux *runtime.ServeMux, swaggerPath, swaggerDir, defaultJsonFile string) {
 	// Serve Swagger specification files (JSON or YAML)
 	swaggerFS := http.FileServer(http.Dir(swaggerDir))
-	mux.HandlePath("GET", swaggerPath+"/*/*", func(w http.ResponseWriter, r *http.Request, pathParams map[string]string) {
+	mux.HandlePath("GET", swaggerPath+"/*", func(w http.ResponseWriter, r *http.Request, pathParams map[string]string) {
 		http.StripPrefix(swaggerPath, swaggerFS).ServeHTTP(w, r)
 	})
 

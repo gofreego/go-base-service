@@ -3,7 +3,7 @@ module gobaseservice
 go 1.23.3
 
 require (
-	github.com/gofreego/configo v1.0.0
+	github.com/gofreego/configo v1.0.3
 	github.com/gofreego/goutils v1.0.9-0.20250321203825-c1a77f580b9c
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20240903143218-8af14fe29dc1
