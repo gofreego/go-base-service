@@ -29,7 +29,7 @@ func main() {
 
 	conf := configs.LoadConfig(ctx, configfile)
 	// initiating logger
-	if err := conf.Logger.InitiateLogger(); err != nil {
+	if err := conf.DynamicConfig.Logger.InitiateLogger(); err != nil {
 		logger.Panic(ctx, "failed to initiate logger, %v", err)
 	}
 	// logging config for debug

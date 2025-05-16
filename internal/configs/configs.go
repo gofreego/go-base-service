@@ -15,17 +15,21 @@ import (
 )
 
 type Configuration struct {
-	Name       string         `yaml:"Name"`
-	AppNames   []string       `yaml:"AppNames"`
-	Logger     logger.Config  `yaml:"Logger"`
-	Server     Server         `yaml:"Server"`
-	Service    service.Config `yaml:"Service"`
-	Repository repo.Config    `yaml:"Repository"`
+	Name       string      `yaml:"Name"`
+	AppNames   []string    `yaml:"AppNames"`
+	Server     Server      `yaml:"Server" `
+	Repository repo.Config `yaml:"Repository"`
 	// The configurations which can be changed at runtime will be managed by configo
 	// those configs will be stored in the configo repository created using following config
 	ConfigRepository repository.Config `yaml:"ConfigRepository"`
 	// config manager instance
 	configManager configo.ConfigManager `yaml:"-"`
+	DynamicConfig DynamicConfig         `yaml:"DynamicConfig" description:"Dynamic Config"`
+}
+
+type DynamicConfig struct {
+	Logger  logger.Config  `yaml:"Logger" name:"Logger Config" type:"parent" description:"Logger Config"`
+	Service service.Config `yaml:"Service" name:"Service Config" type:"parent" description:"Service Config"`
 }
 
 type Server struct {
@@ -56,20 +60,23 @@ func (c *Configuration) SetUpConfigo(ctx context.Context) {
 	if err != nil {
 		logger.Panic(ctx, "failed to create config manager: %v", err)
 	}
-	configManager.RegisterConfig(ctx, &c.Logger, c.RefreshLogger)
-	configManager.RegisterConfig(ctx, &c.Service)
+	err = configManager.RegisterConfig(ctx, &c.DynamicConfig, c.RefreshLogger)
+	if err != nil {
+		logger.Panic(ctx, "failed to register logger config: %v", err)
+	}
 	c.configManager = configManager
 }
 
 func (c *Configuration) RefreshLogger() {
-	c.Logger.InitiateLogger()
+	logger.Info(context.Background(), "Refreshing logger config")
+	c.DynamicConfig.Logger.InitiateLogger()
 }
 
 func (c *Configuration) SetupConfigoUI(ctx context.Context, mux *runtime.ServeMux) {
 	mux.HandlePath(http.MethodGet, "/gobaseservice/configo/**", func(w http.ResponseWriter, r *http.Request, _ map[string]string) {
 		c.configManager.ServeHTTP(w, r)
 	})
-	mux.HandlePath(http.MethodPost, "/gobaseservice/configo/*", func(w http.ResponseWriter, r *http.Request, _ map[string]string) {
+	mux.HandlePath(http.MethodPost, "/gobaseservice/configo/**", func(w http.ResponseWriter, r *http.Request, _ map[string]string) {
 		c.configManager.ServeHTTP(w, r)
 	})
 }

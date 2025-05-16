@@ -43,7 +43,7 @@ func (a *HTTPServer) Run(ctx context.Context) error {
 
 	repository := repository.NewRepository(ctx, &a.cfg.Repository)
 
-	serviceSf := service.NewServiceFactory(ctx, &a.cfg.Service, repository)
+	serviceSf := service.NewServiceFactory(ctx, &a.cfg.DynamicConfig.Service, repository)
 
 	mux := runtime.NewServeMux()
 	// setup configo for ui

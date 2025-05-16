@@ -40,7 +40,7 @@ func (a *GRPCServer) Run(ctx context.Context) error {
 
 	repository := repository.NewRepository(ctx, &a.cfg.Repository)
 
-	serviceSf := service.NewServiceFactory(ctx, &a.cfg.Service, repository)
+	serviceSf := service.NewServiceFactory(ctx, &a.cfg.DynamicConfig.Service, repository)
 
 	// Create a new gRPC server
 	a.server = grpc.NewServer()

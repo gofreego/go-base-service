@@ -7,15 +7,11 @@ import (
 	"github.com/gofreego/goutils/logger"
 )
 
-type Config struct {
-}
-
 type Repository interface {
 	Ping(ctx context.Context) error
 }
 
 type Service struct {
-	cfg  *Config
 	repo Repository
 	gobaseservice_v1.UnimplementedBaseServiceServer
 }
@@ -32,9 +28,8 @@ func (s *Service) Ping(ctx context.Context, req *gobaseservice_v1.PingRequest) (
 	}, nil
 }
 
-func NewService(ctx context.Context, cfg *Config, repo Repository) *Service {
+func NewService(ctx context.Context, repo Repository) *Service {
 	return &Service{
-		cfg:  cfg,
 		repo: repo,
 	}
 }

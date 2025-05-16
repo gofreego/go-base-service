@@ -6,7 +6,6 @@ import (
 )
 
 type Config struct {
-	Ping ping.Config `yaml:"Ping"`
 }
 
 type Repository interface {
@@ -19,6 +18,6 @@ type ServiceFactory struct {
 
 func NewServiceFactory(ctx context.Context, cfg *Config, repo Repository) *ServiceFactory {
 	sf := ServiceFactory{}
-	sf.PingService = ping.NewService(ctx, &cfg.Ping, repo)
+	sf.PingService = ping.NewService(ctx, repo)
 	return &sf
 }

@@ -3,10 +3,6 @@ AppNames: ["HTTP_SERVER", "GRPC_SERVER"]
 Server:
     HTTPPort: 8080
     GRPCPort: 8081
-Logger:
-    AppName: "go-base-service"
-    Build: "dev"
-    Level: "debug" # info/error
 Controller:
     Name: "http"
     HTTP:
@@ -15,10 +11,15 @@ Controller:
         ReadTimeoutMillis: 500
         WriteTimeoutMillis: 500
         Ping: {}
-Service:
-    Ping: {}
 Repository:
     Name: "redis"
     Redis: {}
+DynamicConfig:
+    Logger:
+        AppName: go-base-service
+        Build: dev
+        Level: debug # info/error
+    Service:
+        Ping: {}
 ConfigRepository:
     name: "memory"
