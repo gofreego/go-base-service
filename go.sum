@@ -75,10 +75,6 @@ github.com/gofreego/configo v1.0.4 h1:34O79bE9rX8ds6/LkYkVtq9BmVN+t/rlNq1LO29dyM
 github.com/gofreego/configo v1.0.4/go.mod h1:bkhhGJlneivv2h922VF7jTreUqxWdnYoWph7zGxwkr8=
 github.com/gofreego/ds v1.0.0 h1:y+kxVTnTq4i1qVuQ85YRMcVgNLHKAODowAWXbFYBges=
 github.com/gofreego/ds v1.0.0/go.mod h1:RQv2InR6WfL+KwzNxAXLufOBK01r8hHRSaaKkelyR88=
-github.com/gofreego/goutils v1.2.2-0.20250517173941-fef88387d568 h1:z+4eLhAMSheRRFYrK08E/Mijmf2HgTO9m4qfolKrnB8=
-github.com/gofreego/goutils v1.2.2-0.20250517173941-fef88387d568/go.mod h1:1rNPik63GexHBSZarXTXLjikVsqOlS4JrKMkvM6g9ZI=
-github.com/gofreego/goutils v1.2.3 h1:7YcIGCS1zeMjqJQnybW3pbPxOGCiiEgSGrkXMioQ45w=
-github.com/gofreego/goutils v1.2.3/go.mod h1:1rNPik63GexHBSZarXTXLjikVsqOlS4JrKMkvM6g9ZI=
 github.com/gofreego/goutils v1.2.4 h1:gudckR56dOnAIeGHd+eiq6dVNTdfz1CjxOlVv+Uc0iE=
 github.com/gofreego/goutils v1.2.4/go.mod h1:1rNPik63GexHBSZarXTXLjikVsqOlS4JrKMkvM6g9ZI=
 github.com/gogo/protobuf v1.1.1/go.mod h1:r8qH/GZQm5c6nD/R0oafs1akxWv10x8SbQlK7atdtwQ=

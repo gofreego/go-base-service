@@ -3,6 +3,7 @@ module gobaseservice
 go 1.23.3
 
 require (
+	github.com/gin-gonic/gin v1.10.0
 	github.com/gofreego/configo v1.0.4
 	github.com/gofreego/goutils v1.2.4
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0
@@ -24,7 +25,6 @@ require (
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
-	github.com/gin-gonic/gin v1.10.0 // indirect
 	github.com/go-openapi/jsonpointer v0.21.1 // indirect
 	github.com/go-openapi/jsonreference v0.21.0 // indirect
 	github.com/go-openapi/spec v0.21.0 // indirect
