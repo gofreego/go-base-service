@@ -17,7 +17,7 @@ Repository:
 DynamicConfig:
     Logger:
         AppName: go-base-service
-        Build: dev
+        Build: prod
         Level: debug # info/error
     Service:
         Ping: {}

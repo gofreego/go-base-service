@@ -4,8 +4,7 @@ go 1.23.3
 
 require (
 	github.com/gofreego/configo v1.0.4
-	github.com/gofreego/goutils v1.2.2-0.20250517163500-e0c22dd6f663
-	github.com/google/uuid v1.6.0
+	github.com/gofreego/goutils v1.2.4
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20240903143218-8af14fe29dc1
 	google.golang.org/grpc v1.67.0
@@ -37,6 +36,7 @@ require (
 	github.com/go-zookeeper/zk v1.0.3 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/gofreego/ds v1.0.0 // indirect
+	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/consul/api v1.31.2 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect

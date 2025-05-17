@@ -56,7 +56,7 @@ func (a *HTTPServer) Run(ctx context.Context) error {
 
 	a.server = &http.Server{
 		Addr:    fmt.Sprintf(":%d", a.cfg.Server.HTTPPort),
-		Handler: utils.WithRequestTimeMiddleware(utils.WithRequestIDMiddleware(mux)),
+		Handler: logger.WithRequestMiddleware(logger.WithRequestTimeMiddleware(mux)),
 	}
 
 	logger.Info(ctx, "Starting HTTP server on port %d", a.cfg.Server.HTTPPort)
