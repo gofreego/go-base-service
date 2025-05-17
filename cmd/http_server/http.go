@@ -48,14 +48,15 @@ func (a *HTTPServer) Run(ctx context.Context) error {
 	mux := runtime.NewServeMux()
 	// setup configo for ui
 	a.cfg.SetupConfigoUI(ctx, mux)
-	utils.RegisterSwaggerHandler(ctx, mux, "/swagger", "./api/docs/proto", "/v1/gobaseservice.swagger.json")
+	utils.RegisterSwaggerHandler(ctx, mux, "/gobaseservice/swagger", "./api/docs/proto", "/v1/gobaseservice.swagger.json")
 	err := gobaseservice_v1.RegisterBaseServiceHandlerServer(ctx, mux, serviceSf.PingService)
 	if err != nil {
 		logger.Panic(ctx, "failed to register ping service : %v", err)
 	}
+
 	a.server = &http.Server{
 		Addr:    fmt.Sprintf(":%d", a.cfg.Server.HTTPPort),
-		Handler: mux,
+		Handler: utils.WithRequestTimeMiddleware(utils.WithRequestIDMiddleware(mux)),
 	}
 
 	logger.Info(ctx, "Starting HTTP server on port %d", a.cfg.Server.HTTPPort)

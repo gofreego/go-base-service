@@ -75,8 +75,8 @@ github.com/gofreego/configo v1.0.4 h1:34O79bE9rX8ds6/LkYkVtq9BmVN+t/rlNq1LO29dyM
 github.com/gofreego/configo v1.0.4/go.mod h1:bkhhGJlneivv2h922VF7jTreUqxWdnYoWph7zGxwkr8=
 github.com/gofreego/ds v1.0.0 h1:y+kxVTnTq4i1qVuQ85YRMcVgNLHKAODowAWXbFYBges=
 github.com/gofreego/ds v1.0.0/go.mod h1:RQv2InR6WfL+KwzNxAXLufOBK01r8hHRSaaKkelyR88=
-github.com/gofreego/goutils v1.2.1 h1:cmeDDuK6g/jFaXxa5n9rJqusxJikYAJcrjqjhSm2AbY=
-github.com/gofreego/goutils v1.2.1/go.mod h1:1rNPik63GexHBSZarXTXLjikVsqOlS4JrKMkvM6g9ZI=
+github.com/gofreego/goutils v1.2.2-0.20250517163500-e0c22dd6f663 h1:bhHYrbo127dJWovXiCZ3nWNTPZ1Rd4KnxV228fm6b90=
+github.com/gofreego/goutils v1.2.2-0.20250517163500-e0c22dd6f663/go.mod h1:1rNPik63GexHBSZarXTXLjikVsqOlS4JrKMkvM6g9ZI=
 github.com/gogo/protobuf v1.1.1/go.mod h1:r8qH/GZQm5c6nD/R0oafs1akxWv10x8SbQlK7atdtwQ=
 github.com/golang/protobuf v1.2.0/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/golang/protobuf v1.3.1/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
@@ -98,6 +98,8 @@ github.com/google/go-cmp v0.5.5/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
 github.com/google/gofuzz v1.0.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=
+github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
+github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0 h1:asbCHRVmodnJTuQ3qamDwqVOIjwqUPTYmYuemVOx+Ys=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0/go.mod h1:ggCgvZ2r7uOoQjOyu2Y1NhHmEPPzzuhWgcza5M1Ji1I=
 github.com/hashicorp/consul/api v1.31.2 h1:NicObVJHcCmyOIl7Z9iHPvvFrocgTYo9cITSGg0/7pw=

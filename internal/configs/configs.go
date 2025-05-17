@@ -54,7 +54,7 @@ func (c *Configuration) SetUpConfigo(ctx context.Context) {
 	cfg := configs.ConfigManagerConfig{
 		ServiceName:         c.Name,
 		ServiceDescription:  "Basic service for starting a new service",
-		ConfigRefreshInSecs: 60,
+		ConfigRefreshInSecs: 10,
 	}
 	configManager, err := configo.NewConfigManager(ctx, &cfg, repo, "/gobaseservice")
 	if err != nil {

@@ -29,9 +29,11 @@ func main() {
 
 	conf := configs.LoadConfig(ctx, configfile)
 	// initiating logger
+	logger.Info(ctx, "Initiating logger")
 	if err := conf.DynamicConfig.Logger.InitiateLogger(); err != nil {
 		logger.Panic(ctx, "failed to initiate logger, %v", err)
 	}
+	logger.AddMiddleLayers(logger.RequestMiddleLayer)
 	// logging config for debug
 	bytes, _ := yaml.Marshal(conf)
 	logger.Debug(ctx, "\n%s", bytes)

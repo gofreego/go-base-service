@@ -4,7 +4,8 @@ go 1.23.3
 
 require (
 	github.com/gofreego/configo v1.0.4
-	github.com/gofreego/goutils v1.2.1
+	github.com/gofreego/goutils v1.2.2-0.20250517163500-e0c22dd6f663
+	github.com/google/uuid v1.6.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20240903143218-8af14fe29dc1
 	google.golang.org/grpc v1.67.0
