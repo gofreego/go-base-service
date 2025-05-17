@@ -6,6 +6,7 @@ import (
 	"gobaseservice/internal/service"
 	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"github.com/gofreego/configo/configo"
 	"github.com/gofreego/configo/configo/configs"
 	"github.com/gofreego/configo/configo/repository"
@@ -47,6 +48,7 @@ func LoadConfig(ctx context.Context, file string) *Configuration {
 }
 
 func (c *Configuration) SetUpConfigo(ctx context.Context) {
+	gin.SetMode(gin.ReleaseMode)
 	repo, err := repository.NewRepository(&c.ConfigRepository)
 	if err != nil {
 		logger.Panic(ctx, "failed to set up configo repository: %v", err)
