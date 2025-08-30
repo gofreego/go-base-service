@@ -3,11 +3,12 @@ package grpc_server
 import (
 	"context"
 	"fmt"
-	"gobaseservice/api/gobaseservice_v1"
-	"gobaseservice/internal/configs"
-	"gobaseservice/internal/repository"
-	"gobaseservice/internal/service"
 	"net"
+
+	"github.com/gofreego/gobaseservice/api/gobaseservice_v1"
+	"github.com/gofreego/gobaseservice/internal/configs"
+	"github.com/gofreego/gobaseservice/internal/repository"
+	"github.com/gofreego/gobaseservice/internal/service"
 
 	"github.com/gofreego/goutils/logger"
 	"google.golang.org/grpc"
@@ -38,14 +39,14 @@ func (a *GRPCServer) Run(ctx context.Context) error {
 		logger.Panic(ctx, "grpc port is not provided")
 	}
 
-	repository := repository.NewRepository(ctx, &a.cfg.Repository)
+	repository := repository.GetInstance(ctx, &a.cfg.Repository)
 
-	serviceSf := service.NewServiceFactory(ctx, &a.cfg.DynamicConfig.Service, repository)
+	service := service.NewService(ctx, &a.cfg.Service, repository)
 
 	// Create a new gRPC server
 	a.server = grpc.NewServer()
 
-	gobaseservice_v1.RegisterBaseServiceServer(a.server, serviceSf.PingService)
+	gobaseservice_v1.RegisterBaseServiceServer(a.server, service)
 
 	logger.Info(ctx, "Starting gRPC server on port %d", a.cfg.Server.GRPCPort)
 

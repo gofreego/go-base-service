@@ -2,22 +2,24 @@ package service
 
 import (
 	"context"
-	"gobaseservice/internal/service/ping"
+
+	"github.com/gofreego/gobaseservice/api/gobaseservice_v1"
 )
 
 type Config struct {
 }
 
 type Repository interface {
-	ping.Repository
+	Ping(ctx context.Context) error
 }
 
-type ServiceFactory struct {
-	PingService *ping.Service
+type Service struct {
+	repo Repository
+	gobaseservice_v1.UnimplementedBaseServiceServer
 }
 
-func NewServiceFactory(ctx context.Context, cfg *Config, repo Repository) *ServiceFactory {
-	sf := ServiceFactory{}
-	sf.PingService = ping.NewService(ctx, repo)
-	return &sf
+func NewService(ctx context.Context, cfg *Config, repo Repository) *Service {
+	return &Service{
+		repo: repo,
+	}
 }

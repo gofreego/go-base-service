@@ -1,25 +1,29 @@
-Name: "go-base-service"
-AppNames: ["HTTP_SERVER", "GRPC_SERVER"]
+LogConfig: true
+Logger:
+  AppName: gobaseservice
+  Build: dev
+  Level: debug
+ConfigReader:
+  Name: ""
+  Format: ""
+  Consul:
+    Address: ""
+    Token: ""
+    Path: ""
+  Zookeeper:
+    Address: ""
+    Path: ""
+    Username: ""
+    Password: ""
+AppNames:
+- HTTP_SERVER
+- GRPC_SERVER
 Server:
-    HTTPPort: 8080
-    GRPCPort: 8081
-Controller:
-    Name: "http"
-    HTTP:
-        Port: 8080
-        GinMode: "release"
-        ReadTimeoutMillis: 500
-        WriteTimeoutMillis: 500
-        Ping: {}
+  GRPCPort: 8086
+  HTTPPort: 8085
 Repository:
-    Name: "redis"
-    Redis: {}
-DynamicConfig:
-    Logger:
-        AppName: go-base-service
-        Build: prod
-        Level: debug # info/error
-    Service:
-        Ping: {}
-ConfigRepository:
-    name: "memory"
+  Name : memory
+Service: {}
+Debug:
+  Enabled: true
+  EnablePprof: true

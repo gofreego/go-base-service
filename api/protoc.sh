@@ -5,11 +5,11 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
-# Navigate to the directory containing the proto files
+# Navigate to the api directory
 cd api/
 # update the buf dependencies
 buf dep update
-# Run buf generate to compile the proto files
-buf generate ./proto/v1/*.proto
+# Run buf generate from current directory
+buf generate
 
 echo "Proto files compiled successfully using buf."

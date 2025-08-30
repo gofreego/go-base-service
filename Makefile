@@ -10,18 +10,23 @@ clean:
 	rm -f application
 
 docker: build-linux
-	docker build -t go-base-service .
+	docker build -t gobaseservice .
 	rm -f application
-docker-run:
-	docker run -p 8080:8080 go-base-service
+
+docker-run: docker
+	@echo "Tagging image as latest"
+	docker tag gobaserservice gobaseservice:latest
+	@echo "removing existing container named gobaseservice if any"
+	docker rm -f gobaseservice || true
+	@echo "Running image with name gobaseservice, mapping ports 8085:8085 and 8086:8086"
+	docker run -d --name gobaserservice -p 8085:8085 -p 8086:8086 gobaserservice:latest
 
 install: 
 	go mod tidy
-	go install \
-    github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway \
-    github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2 \
-    google.golang.org/protobuf/cmd/protoc-gen-go \
-    google.golang.org/grpc/cmd/protoc-gen-go-grpc
+	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway
+	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2
+	go install google.golang.org/protobuf/cmd/protoc-gen-go
+	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.5.1
 
 setup:
 	sh ./api/protoc.sh

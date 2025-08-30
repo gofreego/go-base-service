@@ -3,15 +3,14 @@ package main
 import (
 	"context"
 	"flag"
-	"fmt"
-	"gobaseservice/cmd/grpc_server"
-	"gobaseservice/cmd/http_server"
-	"gobaseservice/internal/configs"
-	"gobaseservice/internal/constants"
+
+	"github.com/gofreego/gobaseservice/cmd/grpc_server"
+	"github.com/gofreego/gobaseservice/cmd/http_server"
+	"github.com/gofreego/gobaseservice/internal/configs"
+	"github.com/gofreego/gobaseservice/internal/constants"
 
 	"github.com/gofreego/goutils/apputils"
 	"github.com/gofreego/goutils/logger"
-	"gopkg.in/yaml.v3"
 )
 
 var (
@@ -25,20 +24,10 @@ func main() {
 	flag.Parse()
 	ctx := context.Background()
 
-	configfile := fmt.Sprintf("%s/%s.yaml", path, env)
+	conf := configs.LoadConfig(ctx, path, env)
 
-	conf := configs.LoadConfig(ctx, configfile)
-	// initiating logger
-	logger.Info(ctx, "Initiating logger")
-	if err := conf.DynamicConfig.Logger.InitiateLogger(); err != nil {
-		logger.Panic(ctx, "failed to initiate logger, %v", err)
-	}
+	conf.Logger.InitiateLogger()
 	logger.AddMiddleLayers(logger.RequestMiddleLayer)
-	// logging config for debug
-	bytes, _ := yaml.Marshal(conf)
-	logger.Debug(ctx, "\n%s", bytes)
-
-	conf.SetUpConfigo(ctx)
 
 	// starting application
 	var apps []apputils.Application

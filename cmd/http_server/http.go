@@ -3,12 +3,14 @@ package http_server
 import (
 	"context"
 	"fmt"
-	"gobaseservice/api/gobaseservice_v1"
-	"gobaseservice/internal/configs"
-	"gobaseservice/internal/repository"
-	"gobaseservice/internal/service"
-	"gobaseservice/pkg/utils"
 	"net/http"
+
+	"github.com/gofreego/gobaseservice/api/gobaseservice_v1"
+	"github.com/gofreego/gobaseservice/internal/configs"
+	"github.com/gofreego/gobaseservice/internal/repository"
+	"github.com/gofreego/gobaseservice/internal/service"
+	"github.com/gofreego/gobaseservice/pkg/debug"
+	"github.com/gofreego/gobaseservice/pkg/utils"
 
 	"github.com/gofreego/goutils/logger"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
@@ -41,26 +43,32 @@ func (a *HTTPServer) Run(ctx context.Context) error {
 		logger.Panic(ctx, "http port is not provided")
 	}
 
-	repository := repository.NewRepository(ctx, &a.cfg.Repository)
-
-	serviceSf := service.NewServiceFactory(ctx, &a.cfg.DynamicConfig.Service, repository)
+	service := service.NewService(ctx, &a.cfg.Service, repository.GetInstance(ctx, &a.cfg.Repository))
 
 	mux := runtime.NewServeMux()
-	// setup configo for ui
-	a.cfg.SetupConfigoUI(ctx, mux)
-	utils.RegisterSwaggerHandler(ctx, mux, "/gobaseservice/swagger", "./api/docs/proto", "/v1/gobaseservice.swagger.json")
-	err := gobaseservice_v1.RegisterBaseServiceHandlerServer(ctx, mux, serviceSf.PingService)
+
+	utils.RegisterSwaggerHandler(ctx, mux, "/gobaseservice/v1/swagger", "./api/docs/proto", "/gobaserservice/v1/gobaserservice.swagger.json")
+	err := gobaseservice_v1.RegisterBaseServiceHandlerServer(ctx, mux, service)
 	if err != nil {
 		logger.Panic(ctx, "failed to register ping service : %v", err)
 	}
 
+	// Register debug endpoints if enabled
+	if a.cfg.Debug.Enabled {
+		debug.RegisterDebugHandlersWithGateway(mux, a.cfg.Logger.AppName, string(a.cfg.Logger.Build), "/gobaserservice/v1", a.cfg.Debug.EnablePprof)
+	}
+
 	a.server = &http.Server{
 		Addr:    fmt.Sprintf(":%d", a.cfg.Server.HTTPPort),
-		Handler: logger.WithRequestMiddleware(logger.WithRequestTimeMiddleware(mux)),
+		Handler: logger.WithRequestMiddleware(logger.WithRequestTimeMiddleware(utils.CORSMiddleware(mux))),
 	}
 
 	logger.Info(ctx, "Starting HTTP server on port %d", a.cfg.Server.HTTPPort)
-	logger.Info(ctx, "Swagger UI is available at `http://localhost:%d/swagger`", a.cfg.Server.HTTPPort)
+	logger.Info(ctx, "Swagger UI is available at `http://localhost:%d/gobaseservice/v1/swagger`", a.cfg.Server.HTTPPort)
+	if a.cfg.Debug.Enabled {
+		logger.Info(ctx, "Debug dashboard available at `http://localhost:%d/gobaserservice/v1/debug`", a.cfg.Server.HTTPPort)
+		logger.Info(ctx, "Health endpoints at `http://localhost:%d/gobaserservice/v1/health`", a.cfg.Server.HTTPPort)
+	}
 	// Start HTTP server (and proxy calls to gRPC server endpoint)
 	err = a.server.ListenAndServe()
 	if err != nil && err != http.ErrServerClosed {

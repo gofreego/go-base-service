@@ -1,0 +1,18 @@
+syntax = "proto3";
+package v1;
+
+option go_package = "./gobaseservice_v1";
+
+import "google/api/annotations.proto";
+import "proto/common/ping.proto";
+
+service BaseService {
+    
+    // Ping is a simple GET request that returns a Pong message.
+    rpc Ping (PingRequest) returns (PingResponse) {
+        option (google.api.http) = {
+            get: "/gobaserservice/v1/ping"
+        };
+    }
+}
+

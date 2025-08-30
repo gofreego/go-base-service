@@ -2,25 +2,43 @@ package repository
 
 import (
 	"context"
-	"gobaseservice/internal/repository/redis"
-	"gobaseservice/internal/service"
-)
+	"sync"
 
-const (
-	REDIS = "redis"
-	MONGO = "mongo"
-	MYSQL = "mysql"
+	"github.com/gofreego/gobaseservice/internal/repository/memory"
+	"github.com/gofreego/gobaseservice/internal/service"
 )
 
 type Config struct {
-	Name  string       `yaml:"Name"`
-	Redis redis.Config `yaml:"Redis"`
+	Name   string        `yaml:"Name"`
+	Memory memory.Config `yaml:"Memory"`
 }
 
-func NewRepository(ctx context.Context, cfg *Config) service.Repository {
-	switch cfg.Name {
-	case REDIS:
-		return redis.NewRepository(ctx, &cfg.Redis)
+var (
+	instance service.Repository
+	once     sync.Once
+	mu       sync.RWMutex
+)
+
+// GetInstance returns the singleton instance of the repository
+func GetInstance(ctx context.Context, cfg *Config) service.Repository {
+	mu.RLock()
+	if instance != nil {
+		defer mu.RUnlock()
+		return instance
 	}
-	panic("invalid repository name , provided `" + cfg.Name + "` expected + `" + REDIS + "`")
+	mu.RUnlock()
+
+	once.Do(func() {
+		mu.Lock()
+		defer mu.Unlock()
+		if instance == nil {
+			repo, err := memory.NewRepository(ctx, &cfg.Memory)
+			if err != nil {
+				panic("failed to create repository: " + err.Error())
+			}
+			instance = repo
+		}
+	})
+
+	return instance
 }

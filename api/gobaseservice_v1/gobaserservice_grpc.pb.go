@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: proto/v1/gobaseservice.proto
+// source: proto/gobaserservice/v1/gobaserservice.proto
 
 package gobaseservice_v1
 
@@ -19,20 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BaseService_Ping_FullMethodName     = "/v1.BaseService/Ping"
-	BaseService_PingPost_FullMethodName = "/v1.BaseService/PingPost"
+	BaseService_Ping_FullMethodName = "/v1.BaseService/Ping"
 )
 
 // BaseServiceClient is the client API for BaseService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// Description BaseService is a simple service providing ping endpoints.
 type BaseServiceClient interface {
 	// Ping is a simple GET request that returns a Pong message.
 	Ping(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingResponse, error)
-	// PingPost is a POST request that returns a Pong message.
-	PingPost(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingResponse, error)
 }
 
 type baseServiceClient struct {
@@ -53,26 +48,12 @@ func (c *baseServiceClient) Ping(ctx context.Context, in *PingRequest, opts ...g
 	return out, nil
 }
 
-func (c *baseServiceClient) PingPost(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PingResponse)
-	err := c.cc.Invoke(ctx, BaseService_PingPost_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BaseServiceServer is the server API for BaseService service.
 // All implementations must embed UnimplementedBaseServiceServer
 // for forward compatibility.
-//
-// Description BaseService is a simple service providing ping endpoints.
 type BaseServiceServer interface {
 	// Ping is a simple GET request that returns a Pong message.
 	Ping(context.Context, *PingRequest) (*PingResponse, error)
-	// PingPost is a POST request that returns a Pong message.
-	PingPost(context.Context, *PingRequest) (*PingResponse, error)
 	mustEmbedUnimplementedBaseServiceServer()
 }
 
@@ -85,9 +66,6 @@ type UnimplementedBaseServiceServer struct{}
 
 func (UnimplementedBaseServiceServer) Ping(context.Context, *PingRequest) (*PingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
-}
-func (UnimplementedBaseServiceServer) PingPost(context.Context, *PingRequest) (*PingResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PingPost not implemented")
 }
 func (UnimplementedBaseServiceServer) mustEmbedUnimplementedBaseServiceServer() {}
 func (UnimplementedBaseServiceServer) testEmbeddedByValue()                     {}
@@ -128,24 +106,6 @@ func _BaseService_Ping_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BaseService_PingPost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PingRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BaseServiceServer).PingPost(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BaseService_PingPost_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BaseServiceServer).PingPost(ctx, req.(*PingRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // BaseService_ServiceDesc is the grpc.ServiceDesc for BaseService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -157,11 +117,7 @@ var BaseService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "Ping",
 			Handler:    _BaseService_Ping_Handler,
 		},
-		{
-			MethodName: "PingPost",
-			Handler:    _BaseService_PingPost_Handler,
-		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/v1/gobaseservice.proto",
+	Metadata: "proto/gobaserservice/v1/gobaserservice.proto",
 }
