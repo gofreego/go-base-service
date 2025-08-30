@@ -67,7 +67,6 @@ func (a *HTTPServer) Run(ctx context.Context) error {
 	logger.Info(ctx, "Swagger UI is available at `http://localhost:%d/gobaseservice/v1/swagger`", a.cfg.Server.HTTPPort)
 	if a.cfg.Debug.Enabled {
 		logger.Info(ctx, "Debug dashboard available at `http://localhost:%d/gobaserservice/v1/debug`", a.cfg.Server.HTTPPort)
-		logger.Info(ctx, "Health endpoints at `http://localhost:%d/gobaserservice/v1/health`", a.cfg.Server.HTTPPort)
 	}
 	// Start HTTP server (and proxy calls to gRPC server endpoint)
 	err = a.server.ListenAndServe()

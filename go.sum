@@ -33,8 +33,8 @@ github.com/go-logr/stdr v1.2.2/go.mod h1:mMo/vtBO5dYbehREoey6XUKy/eSumjCCveDpRre
 github.com/go-stack/stack v1.8.0/go.mod h1:v0f6uXyyMGvRgIKkXu+yp6POWl0qKG85gN/melR3HDY=
 github.com/go-zookeeper/zk v1.0.3 h1:7M2kwOsc//9VeeFiPtf+uSJlVpU66x9Ba5+8XK7/TDg=
 github.com/go-zookeeper/zk v1.0.3/go.mod h1:nOB03cncLtlp4t+UAkGSV+9beXP/akpekBwL+UX1Qcw=
-github.com/gofreego/goutils v1.3.0 h1:GvOkR8EDMOxkKTvaN6UAbQFl8ukNC8kVCS7wldyoanA=
-github.com/gofreego/goutils v1.3.0/go.mod h1:FoBJR+f/o51EETbdCPvPf7ZMM6Xw5ndTrFqvSFpuMp8=
+github.com/gofreego/goutils v1.3.1 h1:YjHbwgRfYAG5nkOSxEUtFt5gMzVltQSCUQeM0dIb+bY=
+github.com/gofreego/goutils v1.3.1/go.mod h1:FoBJR+f/o51EETbdCPvPf7ZMM6Xw5ndTrFqvSFpuMp8=
 github.com/gogo/protobuf v1.1.1/go.mod h1:r8qH/GZQm5c6nD/R0oafs1akxWv10x8SbQlK7atdtwQ=
 github.com/golang/protobuf v1.2.0/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/golang/protobuf v1.3.1/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
