@@ -14,7 +14,7 @@ This template follows the principles of clean architecture and provides a solid 
 
 - 🚀 **Dual Protocol Support**: Both gRPC and HTTP/REST APIs with gRPC-Gateway
 - 🏗️ **Clean Architecture**: Well-organized project structure following Go best practices
-- 📋 **Protocol Buffers**: Type-safe API definitions with automatic code generation
+- 📋 **Protocol Buffers**: Type-safe API definitions with Buf-powered code generation
 - 🔧 **Configuration Management**: YAML-based configuration with environment support
 - 📊 **Structured Logging**: Comprehensive logging with configurable levels
 - 🔍 **Debug Support**: Built-in debugging endpoints and pprof integration
@@ -24,17 +24,22 @@ This template follows the principles of clean architecture and provides a solid 
 - 🛡️ **Graceful Shutdown**: Proper application lifecycle management
 - 🔌 **Repository Pattern**: Pluggable data layer with memory implementation
 - 🎯 **Middleware Support**: HTTP middleware for cross-cutting concerns
+- 🛠️ **Modern Tooling**: Uses Buf for efficient Protocol Buffer management
 
 ## Project Structure
 
 ```
 go-base-service/
 ├── api/                          # API definitions and generated code
-│   ├── proto/                    # Protocol Buffer definitions
-│   │   ├── common/              # Shared proto messages
-│   │   └── gobaserservice/v1/   # Service-specific protos
-│   ├── gobaseservice_v1/        # Generated Go code from protos
-│   └── docs/                    # Generated API documentation
+│   ├── buf.yaml                 # Buf configuration for Proto management
+│   ├── buf.gen.yaml            # Buf code generation configuration
+│   ├── buf.lock                # Buf dependency lock file
+│   ├── protoc.sh               # Proto compilation script using Buf
+│   ├── proto/                  # Protocol Buffer definitions
+│   │   ├── common/            # Shared proto messages
+│   │   └── gobaserservice/v1/ # Service-specific protos
+│   ├── gobaseservice_v1/      # Generated Go code from protos
+│   └── docs/                  # Generated API documentation
 ├── cmd/                         # Application entry points
 │   ├── grpc_server/            # gRPC server implementation
 │   └── http_server/            # HTTP server implementation  
@@ -59,7 +64,7 @@ go-base-service/
 ### Prerequisites
 
 - Go 1.23.3 or later
-- Protocol Buffers compiler (`protoc`)
+- Buf CLI (`buf`) - Modern Protocol Buffer toolchain
 - Docker (optional, for containerized deployment)
 
 ### Installation
@@ -75,7 +80,7 @@ go-base-service/
    make install
    ```
 
-3. **Generate API code from Protocol Buffers:**
+3. **Generate API code from Protocol Buffers using Buf:**
    ```bash
    make setup
    ```
@@ -159,7 +164,7 @@ Debug:
    }
    ```
 
-3. **Regenerate code:**
+3. **Regenerate code using Buf:**
    ```bash
    make setup
    ```
@@ -186,7 +191,7 @@ make clean        # Clean build artifacts
 make docker       # Build Docker image
 make docker-run   # Build and run in Docker container
 make install      # Install dependencies and tools
-make setup        # Generate code from protobuf definitions
+make setup        # Generate code from protobuf definitions using Buf
 ```
 
 ### Repository Layer
@@ -251,9 +256,30 @@ When running the service, Swagger documentation is available at:
 - **google.golang.org/protobuf**: Protocol Buffers support
 
 ### Development Tools
-- **protoc**: Protocol Buffer compiler
+- **buf**: Modern Protocol Buffer toolchain for compilation and dependency management
 - **protoc-gen-go**: Go code generator for protobuf
 - **protoc-gen-grpc-gateway**: HTTP gateway generator
+
+## Buf Configuration
+
+The project uses Buf for Protocol Buffer management with the following configuration:
+
+### `api/buf.yaml`
+- Defines the module configuration
+- Sets up linting rules using DEFAULT ruleset
+- Configures breaking change detection
+- Declares dependency on `googleapis/googleapis`
+
+### `api/buf.gen.yaml` 
+- Configures code generation plugins:
+  - `go`: Generates Go structs from proto messages
+  - `go-grpc`: Generates gRPC service interfaces
+  - `grpc-gateway`: Generates HTTP/REST gateway code
+  - `openapiv2`: Generates Swagger/OpenAPI documentation
+
+### `api/protoc.sh`
+- Shell script that runs `buf dep update` and `buf generate`
+- Executed by `make setup` command
 
 ## Contributing
 
