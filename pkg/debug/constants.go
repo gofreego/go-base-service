@@ -139,7 +139,7 @@ const (
             font-size: 12px;
         }
         table {
-            width: 100%;
+            width: 100%%;
             border-collapse: collapse;
             margin-top: 10px;
         }
