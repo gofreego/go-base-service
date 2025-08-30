@@ -9,9 +9,10 @@ import (
 	"github.com/gofreego/gobaseservice/internal/configs"
 	"github.com/gofreego/gobaseservice/internal/repository"
 	"github.com/gofreego/gobaseservice/internal/service"
-	"github.com/gofreego/gobaseservice/pkg/utils"
 
+	"github.com/gofreego/goutils/api"
 	"github.com/gofreego/goutils/api/debug"
+
 	"github.com/gofreego/goutils/logger"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 )
@@ -47,7 +48,7 @@ func (a *HTTPServer) Run(ctx context.Context) error {
 
 	mux := runtime.NewServeMux()
 
-	utils.RegisterSwaggerHandler(ctx, mux, "/gobaseservice/v1/swagger", "./api/docs/proto", "/gobaserservice/v1/gobaserservice.swagger.json")
+	api.RegisterSwaggerHandler(ctx, mux, "/gobaseservice/v1/swagger", "./api/docs/proto", "/gobaserservice/v1/gobaserservice.swagger.json")
 	err := gobaseservice_v1.RegisterBaseServiceHandlerServer(ctx, mux, service)
 	if err != nil {
 		logger.Panic(ctx, "failed to register ping service : %v", err)
@@ -60,7 +61,7 @@ func (a *HTTPServer) Run(ctx context.Context) error {
 
 	a.server = &http.Server{
 		Addr:    fmt.Sprintf(":%d", a.cfg.Server.HTTPPort),
-		Handler: logger.WithRequestMiddleware(logger.WithRequestTimeMiddleware(utils.CORSMiddleware(mux))),
+		Handler: logger.WithRequestMiddleware(logger.WithRequestTimeMiddleware(api.CORSMiddleware(mux))),
 	}
 
 	logger.Info(ctx, "Starting HTTP server on port %d", a.cfg.Server.HTTPPort)
