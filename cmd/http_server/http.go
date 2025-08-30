@@ -9,9 +9,9 @@ import (
 	"github.com/gofreego/gobaseservice/internal/configs"
 	"github.com/gofreego/gobaseservice/internal/repository"
 	"github.com/gofreego/gobaseservice/internal/service"
-	"github.com/gofreego/gobaseservice/pkg/debug"
 	"github.com/gofreego/gobaseservice/pkg/utils"
 
+	"github.com/gofreego/goutils/api/debug"
 	"github.com/gofreego/goutils/logger"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 )
