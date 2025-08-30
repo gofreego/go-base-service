@@ -7,6 +7,7 @@ import (
 	repo "github.com/gofreego/gobaseservice/internal/repository"
 	"github.com/gofreego/gobaseservice/internal/service"
 
+	"github.com/gofreego/goutils/api/debug"
 	"github.com/gofreego/goutils/configutils"
 	"github.com/gofreego/goutils/logger"
 )
@@ -19,17 +20,12 @@ type Configuration struct {
 	Server       Server             `yaml:"Server" `
 	Repository   repo.Config        `yaml:"Repository"`
 	Service      service.Config     `yaml:"Service"`
-	Debug        DebugConfig        `yaml:"Debug"`
+	Debug        debug.Config       `yaml:"Debug"`
 }
 
 type Server struct {
 	GRPCPort int `yaml:"GRPCPort"`
 	HTTPPort int `yaml:"HTTPPort"`
-}
-
-type DebugConfig struct {
-	Enabled     bool `yaml:"Enabled"`
-	EnablePprof bool `yaml:"EnablePprof"`
 }
 
 func LoadConfig(ctx context.Context, path string, env string) *Configuration {

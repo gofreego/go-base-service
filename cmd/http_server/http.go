@@ -56,7 +56,7 @@ func (a *HTTPServer) Run(ctx context.Context) error {
 
 	// Register debug endpoints if enabled
 	if a.cfg.Debug.Enabled {
-		debug.RegisterDebugHandlersWithGateway(mux, a.cfg.Logger.AppName, string(a.cfg.Logger.Build), "/gobaserservice/v1", a.cfg.Debug.EnablePprof)
+		debug.RegisterDebugHandlersWithGateway(ctx, &a.cfg.Debug, mux, a.cfg.Logger.AppName, string(a.cfg.Logger.Build), "/gobaserservice/v1")
 	}
 
 	a.server = &http.Server{
