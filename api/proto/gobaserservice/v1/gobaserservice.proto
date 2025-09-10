@@ -4,7 +4,22 @@ package v1;
 option go_package = "./gobaseservice_v1";
 
 import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 import "proto/common/ping.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "GoBaseService API"
+    version: "v1.0.0"
+    description: "GoBaseService is a basic service to show how to structure a service."
+  }
+  tags: [
+    {
+      name: "Ping"
+      description: "Health check endpoints"
+    }
+  ]
+};
 
 service BaseService {
     
@@ -12,6 +27,11 @@ service BaseService {
     rpc Ping (PingRequest) returns (PingResponse) {
         option (google.api.http) = {
             get: "/gobaserservice/v1/ping"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            tags: "Ping"
+            summary: "Ping the server"
+            description: "Check if the server is alive."
         };
     }
 }

@@ -1,10 +1,15 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "proto/gobaserservice/v1/gobaserservice.proto",
-    "version": "version not set"
+    "title": "GoBaseService API",
+    "description": "GoBaseService is a basic service to show how to structure a service.",
+    "version": "v1.0.0"
   },
   "tags": [
+    {
+      "name": "Ping",
+      "description": "Health check endpoints"
+    },
     {
       "name": "BaseService"
     }
@@ -18,7 +23,8 @@
   "paths": {
     "/gobaserservice/v1/ping": {
       "get": {
-        "summary": "Ping is a simple GET request that returns a Pong message.",
+        "summary": "Ping the server",
+        "description": "Check if the server is alive.",
         "operationId": "BaseService_Ping",
         "responses": {
           "200": {
@@ -37,13 +43,14 @@
         "parameters": [
           {
             "name": "message",
+            "description": "Message must be non-empty and between 1-100 characters",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "BaseService"
+          "Ping"
         ]
       }
     }
