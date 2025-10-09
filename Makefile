@@ -23,10 +23,12 @@ docker-run: docker
 
 install: 
 	go mod tidy
+	go get github.com/grpc-ecosystem/grpc-gateway/v2/internal/descriptor@v2.27.2
 	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway
 	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2
 	go install google.golang.org/protobuf/cmd/protoc-gen-go
 	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.5.1
+	go install github.com/envoyproxy/protoc-gen-validate@latest
 	go install github.com/gofreego/goutils/cmd/sql-migrator@v1.3.8
 
 setup:
