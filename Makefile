@@ -32,5 +32,6 @@ install:
 	go install github.com/gofreego/goutils/cmd/sql-migrator@v1.3.8
 
 setup:
+	@echo "Compiling proto files..."
 	sh ./api/protoc.sh
 	go mod tidy
