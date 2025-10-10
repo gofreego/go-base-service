@@ -48,7 +48,7 @@ func (a *HTTPServer) Run(ctx context.Context) error {
 
 	mux := runtime.NewServeMux()
 
-	api.RegisterSwaggerHandler(ctx, mux, "/gobaseservice/v1/swagger", "./api/docs/proto", "/gobaserservice/v1/gobaserservice.swagger.json")
+	api.RegisterSwaggerHandler(ctx, mux, "/gobaseservice/v1/swagger", "./api/docs/proto", "/gobaseservice/v1/gobaseservice.swagger.json")
 	err := gobaseservice_v1.RegisterBaseServiceHandlerServer(ctx, mux, service)
 	if err != nil {
 		logger.Panic(ctx, "failed to register ping service : %v", err)
@@ -56,7 +56,7 @@ func (a *HTTPServer) Run(ctx context.Context) error {
 
 	// Register debug endpoints if enabled
 	if a.cfg.Debug.Enabled {
-		debug.RegisterDebugHandlersWithGateway(ctx, &a.cfg.Debug, mux, a.cfg.Logger.AppName, string(a.cfg.Logger.Build), "/gobaserservice/v1")
+		debug.RegisterDebugHandlersWithGateway(ctx, &a.cfg.Debug, mux, a.cfg.Logger.AppName, string(a.cfg.Logger.Build), "/gobaseservice/v1")
 	}
 
 	a.server = &http.Server{
@@ -67,7 +67,7 @@ func (a *HTTPServer) Run(ctx context.Context) error {
 	logger.Info(ctx, "Starting HTTP server on port %d", a.cfg.Server.HTTPPort)
 	logger.Info(ctx, "Swagger UI is available at `http://localhost:%d/gobaseservice/v1/swagger`", a.cfg.Server.HTTPPort)
 	if a.cfg.Debug.Enabled {
-		logger.Info(ctx, "Debug dashboard available at `http://localhost:%d/gobaserservice/v1/debug`", a.cfg.Server.HTTPPort)
+		logger.Info(ctx, "Debug dashboard available at `http://localhost:%d/gobaseservice/v1/debug`", a.cfg.Server.HTTPPort)
 	}
 	// Start HTTP server (and proxy calls to gRPC server endpoint)
 	err = a.server.ListenAndServe()

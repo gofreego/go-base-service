@@ -26,7 +26,7 @@ service BaseService {
     // Ping is a simple GET request that returns a Pong message.
     rpc Ping (PingRequest) returns (PingResponse) {
         option (google.api.http) = {
-            get: "/gobaserservice/v1/ping"
+            get: "/gobaseservice/v1/ping"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             tags: "Ping"

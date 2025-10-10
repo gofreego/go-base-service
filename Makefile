@@ -15,11 +15,11 @@ docker: build-linux
 
 docker-run: docker
 	@echo "Tagging image as latest"
-	docker tag gobaserservice gobaseservice:latest
+	docker tag gobaseservice gobaseservice:latest
 	@echo "removing existing container named gobaseservice if any"
 	docker rm -f gobaseservice || true
 	@echo "Running image with name gobaseservice, mapping ports 8085:8085 and 8086:8086"
-	docker run -d --name gobaserservice -p 8085:8085 -p 8086:8086 gobaserservice:latest
+	docker run -d --name gobaseservice -p 8085:8085 -p 8086:8086 gobaseservice:latest
 
 install: 
 	go mod tidy

@@ -26,10 +26,10 @@ var File_proto_gobaserservice_v1_gobaserservice_proto protoreflect.FileDescripto
 
 const file_proto_gobaserservice_v1_gobaserservice_proto_rawDesc = "" +
 	"\n" +
-	",proto/gobaserservice/v1/gobaserservice.proto\x12\x02v1\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x17proto/common/ping.proto2\x93\x01\n" +
-	"\vBaseService\x12\x83\x01\n" +
-	"\x04Ping\x12\x0f.v1.PingRequest\x1a\x10.v1.PingResponse\"X\x92A6\n" +
-	"\x04Ping\x12\x0fPing the server\x1a\x1dCheck if the server is alive.\x82\xd3\xe4\x93\x02\x19\x12\x17/gobaserservice/v1/pingB\x9b\x01\x92A\x83\x01\x12a\n" +
+	",proto/gobaserservice/v1/gobaserservice.proto\x12\x02v1\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x17proto/common/ping.proto2\x92\x01\n" +
+	"\vBaseService\x12\x82\x01\n" +
+	"\x04Ping\x12\x0f.v1.PingRequest\x1a\x10.v1.PingResponse\"W\x92A6\n" +
+	"\x04Ping\x12\x0fPing the server\x1a\x1dCheck if the server is alive.\x82\xd3\xe4\x93\x02\x18\x12\x16/gobaseservice/v1/pingB\x9b\x01\x92A\x83\x01\x12a\n" +
 	"\x11GoBaseService API\x12DGoBaseService is a basic service to show how to structure a service.2\x06v1.0.0j\x1e\n" +
 	"\x04Ping\x12\x16Health check endpointsZ\x12./gobaseservice_v1b\x06proto3"
 

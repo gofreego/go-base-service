@@ -21,7 +21,7 @@
     "application/json"
   ],
   "paths": {
-    "/gobaserservice/v1/ping": {
+    "/gobaseservice/v1/ping": {
       "get": {
         "summary": "Ping the server",
         "description": "Check if the server is alive.",

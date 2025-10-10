@@ -37,7 +37,7 @@ go-base-service/
 │   ├── protoc.sh               # Proto compilation script using Buf
 │   ├── proto/                  # Protocol Buffer definitions
 │   │   ├── common/            # Shared proto messages
-│   │   └── gobaserservice/v1/ # Service-specific protos
+│   │   └── gobaseservice/v1/ # Service-specific protos
 │   ├── gobaseservice_v1/      # Generated Go code from protos
 │   └── docs/                  # Generated API documentation
 ├── cmd/                         # Application entry points
@@ -100,7 +100,7 @@ Test the ping endpoint:
 
 ```bash
 # HTTP endpoint
-curl http://localhost:8085/gobaserservice/v1/ping
+curl http://localhost:8085/gobaseservice/v1/ping
 
 # Response
 {"message": "Its fine here...!"}
@@ -141,11 +141,11 @@ Debug:
 
 1. **Define the service in Protocol Buffers:**
    ```protobuf
-   // api/proto/gobaserservice/v1/gobaserservice.proto
+   // api/proto/gobaseservice/v1/gobaseservice.proto
    service BaseService {
        rpc YourNewMethod (YourRequest) returns (YourResponse) {
            option (google.api.http) = {
-               post: "/gobaserservice/v1/your-endpoint"
+               post: "/gobaseservice/v1/your-endpoint"
                body: "*"
            };
        }
