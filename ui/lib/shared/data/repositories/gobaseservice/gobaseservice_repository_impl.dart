@@ -1,8 +1,8 @@
 import 'package:ui/core/errors/failures.dart';
 import 'package:ui/core/network/api_service.dart';
 import 'package:ui/shared/data/repositories/gobaseservice/gobaseservice_repository.dart';
-import 'package:ui/src/generated/common/ping.pb.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ui/src/proto/common/ping.pb.dart';
 
 /// Implementation of the GoBaseService repository
 class GoBaseServiceRepositoryImpl implements GoBaseServiceRepository {

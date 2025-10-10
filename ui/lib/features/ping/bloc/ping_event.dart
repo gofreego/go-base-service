@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:ui/src/generated/common/ping.pb.dart';
+import 'package:ui/src/proto/common/ping.pb.dart';
 
 abstract class PingEvent extends Equatable {
   const PingEvent();

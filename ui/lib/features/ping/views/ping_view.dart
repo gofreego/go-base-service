@@ -5,7 +5,7 @@ import 'package:ui/config/dependency_injection/service_locator.dart';
 import 'package:ui/shared/widgets/custom_button.dart';
 import 'package:ui/shared/widgets/custom_text_field.dart';
 import 'package:ui/shared/widgets/error_widget.dart';
-import 'package:ui/src/generated/common/ping.pb.dart';
+import 'package:ui/src/proto/common/ping.pb.dart';
 import '../bloc/ping_bloc.dart';
 import '../bloc/ping_event.dart';
 import '../bloc/ping_state.dart';
